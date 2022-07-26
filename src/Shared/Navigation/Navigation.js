@@ -30,7 +30,9 @@ const Navigation = () => {
           <Link style = {{color:'white', textDecoration:'none'}}to='/appointment'> 
             <Button color="inherit">Appointment</Button>
           </Link>
-          <Button color="inherit">Login</Button>
+          <Link style = {{color:'white', textDecoration:'none'}}to='/login'> 
+            <Button color="inherit">Login</Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </Box>
