@@ -12,13 +12,14 @@ const useFirebase = () => {
 
 
 // register in with email and password
-    const handleRegisterUser = (email, password) => {
+    const handleRegisterUser = (email, password, navigate, from) => {
         setLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
             console.log(user);
+            navigate(from, { replace: true });
             setAuthError('');
         })
         .catch((error) => {
@@ -31,14 +32,16 @@ const useFirebase = () => {
     };
 
 // sign in with email address
-    const handleSignInUser = (email, password) => {
+    const handleSignInUser = (email, password, navigate, from) => {
         setLoading(true);
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
             console.log(user);
+            navigate(from, { replace: true });
             setAuthError('');
+
         })
         .catch((error) => {
             const errorCode = error.code;

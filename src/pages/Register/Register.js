@@ -1,12 +1,15 @@
 import { Alert, Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from '../../hooks/useAuth';
 import registerImg from '../../images/login.png';
 
 const Register = () => {
     const [loginData, setLoginData] = useState({});
     const {handleRegisterUser, loading, user, authError} = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/home";
 
     const handleInputChange = e => {
         const field = e.target.name;
@@ -23,7 +26,7 @@ const Register = () => {
             alert('Password is not matching')
             return
         }
-        handleRegisterUser(loginData.email, loginData.password);
+        handleRegisterUser(loginData.email, loginData.password, navigate, from);
     };
     return (
         <Container sx={{mt:'40px'}}>
