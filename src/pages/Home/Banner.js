@@ -3,16 +3,15 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { Container } from '@mui/system';
 import React from 'react';
-import bg from '../../images/bg.png';
 import Chair from '../../images/chair.png';
 
 
 
 
-const topBackground = {
-    background: `url(${bg})`,
+// const topBackground = {
+//     background: `url(${bg})`,
 
-}
+// }
 
 const Banner = () => {
     return (
