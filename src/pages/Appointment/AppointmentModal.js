@@ -4,7 +4,8 @@ import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
-import React from 'react';
+import React, { useState } from 'react';
+import useAuth from '../../hooks/useAuth';
 
 
 
@@ -21,13 +22,48 @@ const style = {
     p: 4,
   };
 
-const AppointmentModal = ({open, handleClose, booking, date}) => {
+const AppointmentModal = ({open, handleClose, booking, date, setAppointmentSuccess}) => {
     const {name, time} = booking;
+    const {user} = useAuth();
+    const initialData = {
+      patientName: user.displayName,
+      email: user.email,
+      phone: ''
+    }
+    const [appointmentData, setAppointmentData] = useState(initialData);
+
+    const handleOnBlur = e => {
+      const field = e.target.name;
+      const value = e.target.value;
+      const newAppointmentData = {...appointmentData};
+        newAppointmentData[field] = value;
+        console.log(newAppointmentData);
+        setAppointmentData(newAppointmentData);
+    }
 
     const handleBookingSubmit = e => {
         e.preventDefault();
-        alert("Successfully Booked")
-        handleClose();
+      //collect data
+        const appointment = {
+          ...appointmentData,
+          serviceName: name,
+          time: time,
+          date: date.toLocaleDateString()
+        };
+        console.log(appointment);
+      // send data to the server
+        fetch('http://localhost:5000/appointments', {
+          method: 'POST',
+          headers:{'Content-Type': 'application/json'},
+          body: JSON.stringify(appointment)
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.insertedId) {
+            setAppointmentSuccess(true);
+            handleClose();
+          }
+        })
     }
 
     return (
@@ -56,6 +92,7 @@ const AppointmentModal = ({open, handleClose, booking, date}) => {
                 size="small"
                 sx={{width:'90%', margin:1}}
                 />
+
                 <TextField
                 id="outlined-size-small"
                 disabled
@@ -63,24 +100,34 @@ const AppointmentModal = ({open, handleClose, booking, date}) => {
                 size="small"
                 sx={{width:'90%', margin:1}}
                 />
+
                 <TextField
                 id="outlined-size-small"
-                defaultValue='Your Name'
+                name = "patientName"
+                onBlur={handleOnBlur}
+                defaultValue={user.displayName}
                 size="small"
                 sx={{width:'90%', margin:1}}
                 />
+
                 <TextField
                 id="outlined-size-small"
-                defaultValue= 'Your Email'
+                defaultValue= {user.email}
+                name = "email"
+                onBlur={handleOnBlur}
                 size="small"
                 sx={{width:'90%', margin:1}}
                 />
+
                 <TextField
                 id="outlined-size-small"
                 defaultValue= 'Phone'
+                name = "phone"
+                onBlur={handleOnBlur}
                 size="small"
                 sx={{width:'90%', margin:1}}
                 />
+
                 <Button sx={{backgroundColor:'#14d1c8', marginLeft:1}} type="submit" variant="contained">Submit</Button>
             </form>
           </Box>

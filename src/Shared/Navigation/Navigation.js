@@ -32,6 +32,9 @@ const Navigation = () => {
           <Link style = {{color:'white', textDecoration:'none'}}to='/appointment'> 
             <Button color="inherit">Appointment</Button>
           </Link>
+          <Link style = {{color:'white', textDecoration:'none'}}to='/dashboard'> 
+            <Button color="inherit">Dashboard</Button>
+          </Link>
           
           {
             user?.email ?

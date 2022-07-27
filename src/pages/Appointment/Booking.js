@@ -4,7 +4,7 @@ import React from 'react';
 import AppointmentModal from './AppointmentModal';
 
 
-const Booking = ({booking, date}) => {
+const Booking = ({booking, date, setAppointmentSuccess}) => {
     const {name, time, space} = booking;
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -30,6 +30,7 @@ const Booking = ({booking, date}) => {
             open ={open}
             handleClose = {handleClose}
             booking = {booking}
+            setAppointmentSuccess = {setAppointmentSuccess}
             >
 
             </AppointmentModal>

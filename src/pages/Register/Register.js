@@ -26,7 +26,7 @@ const Register = () => {
             alert('Password is not matching')
             return
         }
-        handleRegisterUser(loginData.email, loginData.password, navigate, from);
+        handleRegisterUser(loginData.email, loginData.password, loginData.name, navigate, from);
     };
     return (
         <Container sx={{mt:'40px'}}>
@@ -43,8 +43,18 @@ const Register = () => {
                         <TextField
                             sx={{width:'70%', my:1, backgroundColor:'white' }}
                             id="standard-basic"
+                            label="Your Name"
+                            name="name"
+                            type="text"
+                            variant="standard"
+                            onChange={handleInputChange}
+                            />
+                        <TextField
+                            sx={{width:'70%', my:1, backgroundColor:'white' }}
+                            id="standard-basic"
                             label="Your Email"
                             name="email"
+                            type="email"
                             variant="standard"
                             onChange={handleInputChange}
                             />
