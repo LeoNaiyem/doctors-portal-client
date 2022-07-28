@@ -9,25 +9,28 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 
 
-const BookedAppointments = () => {
+const BookedAppointments = ({date}) => {
     const [bookedAppointments, setBookedAppointments] = useState([]);
     const {user} = useAuth();
+    const dateString = date.toLocaleDateString();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/appointments?email=${user.email}`)
+        fetch(`http://localhost:5000/appointments?email=${user.email}&date=${dateString}`)
         .then(res => res.json())
         .then(data => setBookedAppointments(data))
-    }, [user.email]);
+    }, [ user.email, dateString ]);
 
     return (
         <div>
-            <h1>Total Booked Appointments {bookedAppointments.length}</h1>
+            <h1 style={{textAlign: 'center'}}>Total Booked Appointments {bookedAppointments.length}</h1>
+            <h4 style={{textAlign: 'center'}}>Date: {dateString}</h4>
             <TableContainer component={Paper}>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell align="center">Name</TableCell>
             <TableCell align="center">Time</TableCell>
+            <TableCell align="center">Service</TableCell>
             <TableCell align="center">Action</TableCell>
           </TableRow>
         </TableHead>
@@ -41,6 +44,7 @@ const BookedAppointments = () => {
                 {bookedAppointment.patientName}
               </TableCell>
               <TableCell align="center">{bookedAppointment.time}</TableCell>
+              <TableCell align="center">{bookedAppointment.serviceName}</TableCell>
               <TableCell align="center">Action</TableCell>
             </TableRow>
           ))}

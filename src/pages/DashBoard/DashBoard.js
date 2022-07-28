@@ -25,6 +25,7 @@ const drawerWidth = 240;
 function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [date, setDate] = React.useState(new Date());
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -128,10 +129,10 @@ function Dashboard(props) {
         <Box>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                 <Grid item xs={2} sm={4} md={6}>
-                    <Calender></Calender>
+                    <Calender date ={date} setDate={setDate}></Calender>
                 </Grid>
                 <Grid item xs={2} sm={4} md={6}>
-                    <BookedAppointments></BookedAppointments>
+                    <BookedAppointments date={date} ></BookedAppointments>
                 </Grid>
             </Grid>
         </Box>

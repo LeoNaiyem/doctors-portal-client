@@ -6,7 +6,7 @@ import registerImg from '../../images/login.png';
 
 const Register = () => {
     const [loginData, setLoginData] = useState({});
-    const {handleRegisterUser, loading, user, authError} = useAuth();
+    const {handleRegisterUser, loading, user, authError, handleGoogleSignIn} = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || "/home";
@@ -84,6 +84,7 @@ const Register = () => {
                             <Link style = {{textDecoration:'none'}} to='/login'> 
                                 <Button sx={{width:'70%'}} variant="text ">Already Registered? Login</Button>
                             </Link>
+                            <Button onClick={()=>handleGoogleSignIn(navigate, from)} sx={{width:'70%', mt:'20px'}} variant="contained">Sign in with Google</Button>
                         </form>}
                         {loading && <CircularProgress color="secondary"/>}
                         {user?.email && <Alert sx={{width:'65%'}} severity="success">User Created Successfully</Alert>}

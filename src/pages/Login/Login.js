@@ -6,7 +6,7 @@ import loginImg from '../../images/login.png';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
-    const {handleSignInUser, loading, user, authError} = useAuth();
+    const {handleSignInUser, loading, user, authError, handleGoogleSignIn} = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
     let from = location.state?.from?.pathname || "/home";
@@ -56,6 +56,7 @@ const Login = () => {
                         <Link style = {{textDecoration:'none'}} to='/register'> 
                             <Button sx={{width:'70%'}} variant="text ">New User? Please Register</Button>
                         </Link>
+                        <Button onClick={()=>handleGoogleSignIn(navigate, from)} sx={{width:'70%', mt:'20px'}} variant="contained">Sign in with Google</Button>
                         </form>}
                         {loading && <CircularProgress color="secondary" />}
                         {user?.email && <Alert sx={{width:'65%'}} severity="success">Successfully Logged In</Alert>}
