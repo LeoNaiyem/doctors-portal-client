@@ -35,9 +35,9 @@ const BookedAppointments = ({date}) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {bookedAppointments.map((bookedAppointment) => (
+          {bookedAppointments.map((bookedAppointment, index) => (
             <TableRow
-              key={bookedAppointment.name}
+              key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell align="center" component="th" scope="row">

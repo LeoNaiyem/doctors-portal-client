@@ -40,7 +40,7 @@ const Navigation = () => {
             user?.email ?
             <Button onClick={handleLogOutUser} color="inherit">Logout</Button>
             :
-            <Link style = {{color:'white', textDecoration:'none'}}to='/login'> 
+            <Link style = {{color:'white', textDecoration:'none'}} to='/login'> 
               <Button color="inherit">Login</Button>
             </Link>
           }

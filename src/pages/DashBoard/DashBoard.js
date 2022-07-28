@@ -1,7 +1,6 @@
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import { Grid } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -17,15 +16,13 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import Calender from '../../Shared/Calender';
-import BookedAppointments from './BookedAppointments';
+import { Link, Outlet } from 'react-router-dom';
 
 const drawerWidth = 240;
 
 function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [date, setDate] = React.useState(new Date());
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -35,6 +32,33 @@ function Dashboard(props) {
     <div>
       <Toolbar />
       <Divider />
+      <List>
+        <ListItem>
+          <ListItemButton>
+            <Link style = {{color:'#757575', textDecoration:'none'}} to='/home'>Home</Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem>
+          <ListItemButton>
+            <Link style = {{color:'#757575', textDecoration:'none'}} to='/appointment'>Get Appointment</Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem>
+          <ListItemButton>
+            <Link style = {{color:'#757575', textDecoration:'none'}} to='/dashboard'>My Appointments</Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem>
+          <ListItemButton>
+            <Link style = {{color:'#757575', textDecoration:'none'}} to='/dashboard/history'>My History</Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem>
+          <ListItemButton>
+            <Link style = {{color:'#757575', textDecoration:'none'}} to='/dashboard/addDoctor'>Add Doctor</Link>
+          </ListItemButton>
+        </ListItem>
+      </List>
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem key={text} disablePadding>
@@ -126,16 +150,9 @@ function Dashboard(props) {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-        <Box>
-            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                <Grid item xs={2} sm={4} md={6}>
-                    <Calender date ={date} setDate={setDate}></Calender>
-                </Grid>
-                <Grid item xs={2} sm={4} md={6}>
-                    <BookedAppointments date={date} ></BookedAppointments>
-                </Grid>
-            </Grid>
-        </Box>
+
+          <Outlet></Outlet>
+
       </Box>
     </Box>
   );
