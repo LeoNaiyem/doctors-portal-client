@@ -58,6 +58,11 @@ function Dashboard(props) {
             <Link style = {{color:'#757575', textDecoration:'none'}} to='/dashboard/addDoctor'>Add Doctor</Link>
           </ListItemButton>
         </ListItem>
+        <ListItem>
+          <ListItemButton>
+            <Link style = {{color:'#757575', textDecoration:'none'}} to='/dashboard/users'>All Users</Link>
+          </ListItemButton>
+        </ListItem>
       </List>
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (

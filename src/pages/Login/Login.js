@@ -24,7 +24,6 @@ const Login = () => {
         e.preventDefault();
         handleSignInUser(loginData.email, loginData.password, navigate, from);
     };
-    console.log(loginData);
     return (
             <Container sx={{mt:'40px'}}>
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>

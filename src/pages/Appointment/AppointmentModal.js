@@ -50,7 +50,6 @@ const AppointmentModal = ({open, handleClose, booking, date, setAppointmentSucce
           time: time,
           date: date.toLocaleDateString()
         };
-        console.log(appointment);
       // send data to the server
         fetch('http://localhost:5000/appointments', {
           method: 'POST',

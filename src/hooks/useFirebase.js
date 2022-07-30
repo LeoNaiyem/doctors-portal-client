@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { useEffect, useState } from "react";
 import initializeFirebase from "../Firebase/firebase.init";
+import useToken from "./useToken";
 
 initializeFirebase();
 
@@ -8,6 +9,7 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
     const [authError, setAuthError] = useState('');
+    const [setToken] = useToken();
     const auth = getAuth();
 
 
@@ -31,13 +33,12 @@ const useFirebase = () => {
               });
 
          //send users information to Database
-            saveUserToDataBase(name, email, 'POST');
-            navigate(from, { replace: true });
-            setAuthError('');
+            // saveUserToDataBase(name, email, 'POST');
+            saveUserToDataBase( name, email, 'PUT');
 
          //send users back to their desire page
-         navigate(from, { replace: true });
-         setAuthError('');
+            navigate(from, { replace: true });
+            setAuthError('');
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -85,6 +86,9 @@ const useFirebase = () => {
             const user = userCredential.user;
             console.log(user);
 
+        //  send data to database
+            saveUserToDataBase( user.displayName, email, 'PUT');
+
          //send back users to their desire page
             navigate(from, { replace: true });
             setAuthError('');
@@ -109,7 +113,10 @@ const useFirebase = () => {
         })
         .then(res => res.json())
         .then(data =>{
-            console.log(data);
+            console.log('inside token',data);
+            const accessToken = data.token;
+            localStorage.setItem('accessToken', accessToken);
+            setToken(accessToken);
         })
 
     }
@@ -134,6 +141,7 @@ const useFirebase = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
             setAuthError('');
+            localStorage.removeItem('accessToken');
         })
         .catch((error) => {
             console.log(error);

@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider";
 import Appointment from "./pages/Appointment/Appointment";
 import AddDoctor from "./pages/DashBoard/AddDoctor";
+import AllUsers from "./pages/DashBoard/AllUsers";
 import DashBoard from "./pages/DashBoard/DashBoard";
 import DashboardHome from "./pages/DashBoard/DashboardHome";
 import History from "./pages/DashBoard/History";
@@ -22,6 +23,7 @@ function App() {
               <Route index element={<DashboardHome />} />
               <Route path="addDoctor" element={<AddDoctor />} />
               <Route path="history" element={<History />} />
+              <Route path="users" element={<AllUsers />} />
             </Route>
           </Route>
           <Route path="/login" element={<Login />} />
