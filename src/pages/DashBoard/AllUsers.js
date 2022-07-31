@@ -6,6 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import React, { useEffect, useState } from "react";
+import SingleUser from "./SingleUser";
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
@@ -19,6 +20,7 @@ const AllUsers = () => {
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
+
 
   return (
     <div>
@@ -34,18 +36,11 @@ const AllUsers = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map((user, index) => (
-              <TableRow
-                key={index}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell align="left" component="th" scope="row">
-                  {user?.displayName}
-                </TableCell>
-                <TableCell align="left">{user?.email}</TableCell>
-                <TableCell align="left">Action</TableCell>
-              </TableRow>
-            ))}
+
+            {
+              users.map((user, index) => <SingleUser key={index} user={user} ></SingleUser> )
+            }
+
           </TableBody>
         </Table>
       </TableContainer>

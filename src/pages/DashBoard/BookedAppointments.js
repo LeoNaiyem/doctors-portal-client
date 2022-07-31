@@ -11,16 +11,18 @@ import useAuth from "../../hooks/useAuth";
 
 const BookedAppointments = ({ date }) => {
   const [bookedAppointments, setBookedAppointments] = useState([]);
-  const { user, handleLogOutUser } = useAuth();
+  const { user, handleLogOutUser} = useAuth();
   const navigate = useNavigate();
   const dateString = date.toLocaleDateString();
 
+  
   useEffect(() => {
     fetch(
       `http://localhost:5000/appointments?email=${user.email}&date=${dateString}`,
       {
         method: "GET",
         headers: {
+          "Content-Type": "application/json",
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       }
@@ -35,10 +37,9 @@ const BookedAppointments = ({ date }) => {
         return res.json();
       })
       .then((data) => {
-        setBookedAppointments(data);
+        return setBookedAppointments(data);
       });
   }, [user.email, dateString, navigate, handleLogOutUser]);
-
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>

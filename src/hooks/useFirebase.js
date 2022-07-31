@@ -1,7 +1,6 @@
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { useEffect, useState } from "react";
 import initializeFirebase from "../Firebase/firebase.init";
-import useToken from "./useToken";
 
 initializeFirebase();
 
@@ -9,7 +8,6 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
     const [authError, setAuthError] = useState('');
-    const [setToken] = useToken();
     const auth = getAuth();
 
 
@@ -116,7 +114,6 @@ const useFirebase = () => {
             console.log('inside token',data);
             const accessToken = data.token;
             localStorage.setItem('accessToken', accessToken);
-            setToken(accessToken);
         })
 
     }
@@ -160,6 +157,7 @@ const useFirebase = () => {
     return {
         user,
         loading,
+        setLoading,
         authError,
         handleRegisterUser,
         handleSignInUser,
