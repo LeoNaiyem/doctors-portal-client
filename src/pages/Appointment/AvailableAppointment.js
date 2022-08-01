@@ -52,12 +52,12 @@ const AvailableAppointment = ({date}) => {
        }, 8000);
 
     return (
-        <Container sx={{my: '40px'}}>
+        <Container sx={{my: '40px', position: 'relative'}}>
             <Box sx={{ width: '100%' }}>
                 <Typography sx={{ fontWeight: 500, color:'#14d1c8', textAlign: 'center', my:'10px'}} variant="h4" component="div">
                     Available Appointments On {date.toDateString()}
                 </Typography>
-                <Box sx={{ display:'flex', justifyContent: 'center' }}>
+                <Box sx={{position:'absolute', top: '15%', right:'-50px' }}>
                     { appointmentSuccess && <Alert severity="success">Appointment Booked Successfully</Alert>}
                 </Box>
                 <Grid container spacing={ { xs: 2, md: 3 } } columns={{ xs: 4, sm: 8, md: 12 }}>

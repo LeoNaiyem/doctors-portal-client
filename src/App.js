@@ -1,4 +1,6 @@
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import AuthProvider from "./context/AuthProvider";
 import Appointment from "./pages/Appointment/Appointment";
 import AddDoctor from "./pages/DashBoard/AddDoctor";
@@ -13,23 +15,24 @@ import Register from "./pages/Register/Register";
 
 function App() {
   return (
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="home" element={<Home />} />
-          <Route path="/" element={<PrivateOutlet />}>
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="home" element={<Home />} />
+        <Route path="/" element={<PrivateOutlet />}>
           <Route path="appointment" element={<Appointment />} />
-            <Route path="dashboard" element={<DashBoard />}>
-              <Route index element={<DashboardHome />} />
-              <Route path="addDoctor" element={<AddDoctor />} />
-              <Route path="history" element={<History />} />
-              <Route path="users" element={<AllUsers />} />
-            </Route>
+          <Route path="dashboard" element={<DashBoard />}>
+            <Route index element={<DashboardHome />} />
+            <Route path="addDoctor" element={<AddDoctor />} />
+            <Route path="history" element={<History />} />
+            <Route path="users" element={<AllUsers />} />
           </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </AuthProvider>
+        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+      <ToastContainer />
+    </AuthProvider>
   );
 }
 

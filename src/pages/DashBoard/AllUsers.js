@@ -7,7 +7,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import React, { useEffect, useState } from "react";
 import SingleUser from "./SingleUser";
-
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
@@ -20,30 +19,31 @@ const AllUsers = () => {
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
+  // const {data:users, isLoading} = useQuery('users', ()=> fetch('http://localhost:5000/users').then(res => res.json()));
 
-
+  // if(isLoading){
+  //   return <CircularProgress></CircularProgress>
+  // }
   return (
     <div>
-      <h2 style={{ textAlign: "center" }}>Total User: {users.length}</h2>
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="left">Name</TableCell>
-              <TableCell align="left">Time</TableCell>
-              <TableCell align="left">Action</TableCell>
-              <TableCell align="left">Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-
-            {
-              users.map((user, index) => <SingleUser key={index} user={user} ></SingleUser> )
-            }
-
-          </TableBody>
-        </Table>
-      </TableContainer>
+        <h2 style={{ textAlign: "center" }}>Total User: {users.length}</h2>
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="left">Name</TableCell>
+                <TableCell align="left">Time</TableCell>
+                <TableCell align="left">Action</TableCell>
+                <TableCell align="left">Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {users.map((user, index) => (
+                <SingleUser key={index} user={user}></SingleUser>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
     </div>
   );
 };

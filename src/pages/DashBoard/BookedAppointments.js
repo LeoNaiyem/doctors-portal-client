@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,15 +8,15 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 
 const BookedAppointments = ({ date }) => {
   const [bookedAppointments, setBookedAppointments] = useState([]);
-  const { user, handleLogOutUser} = useAuth();
+  const { user, handleLogOutUser } = useAuth();
   const navigate = useNavigate();
   const dateString = date.toLocaleDateString();
 
-  
   useEffect(() => {
     fetch(
       `http://localhost:5000/appointments?email=${user.email}&date=${dateString}`,
@@ -40,6 +41,26 @@ const BookedAppointments = ({ date }) => {
         return setBookedAppointments(data);
       });
   }, [user.email, dateString, navigate, handleLogOutUser]);
+
+  const handleAppointmentCancel = (id) => {
+    console.log(id)
+    fetch(`http://localhost:5000/appointments/${id}`, {
+      method: 'DELETE',
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.deletedCount === 1) {
+        toast.success('Appointment has been Canceled')
+        const remainingAppointments = bookedAppointments.filter(bp => bp._id !== id);
+        setBookedAppointments(remainingAppointments);
+
+      }else{
+        const errorMessage = data.error;
+        toast.error(errorMessage);
+      }
+    })
+  }
+
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>
@@ -69,7 +90,11 @@ const BookedAppointments = ({ date }) => {
                 <TableCell align="center">
                   {bookedAppointment.serviceName}
                 </TableCell>
-                <TableCell align="center">Action</TableCell>
+                <TableCell align="center">
+                  <Button onClick={()=>handleAppointmentCancel(bookedAppointment._id)} variant="contained" size="small" color="error">
+                    cancel
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
