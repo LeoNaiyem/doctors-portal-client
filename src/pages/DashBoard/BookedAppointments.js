@@ -19,7 +19,7 @@ const BookedAppointments = ({ date }) => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/appointments?email=${user.email}&date=${dateString}`,
+      `https://vast-plateau-43537.herokuapp.com/appointments?email=${user.email}&date=${dateString}`,
       {
         method: "GET",
         headers: {
@@ -44,7 +44,7 @@ const BookedAppointments = ({ date }) => {
 
   const handleAppointmentCancel = (id) => {
     console.log(id)
-    fetch(`http://localhost:5000/appointments/${id}`, {
+    fetch(`https://vast-plateau-43537.herokuapp.com/appointments/${id}`, {
       method: 'DELETE',
     })
     .then(res => res.json())

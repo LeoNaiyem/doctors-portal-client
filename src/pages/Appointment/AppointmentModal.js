@@ -51,7 +51,7 @@ const AppointmentModal = ({open, handleClose, booking, date, setAppointmentSucce
           date: date.toLocaleDateString()
         };
       // send data to the server
-        fetch('http://localhost:5000/appointments', {
+        fetch('https://vast-plateau-43537.herokuapp.com/appointments', {
           method: 'POST',
           headers:{'Content-Type': 'application/json'},
           body: JSON.stringify(appointment)

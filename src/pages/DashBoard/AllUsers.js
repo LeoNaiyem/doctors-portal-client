@@ -10,7 +10,7 @@ import SingleUser from "./SingleUser";
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/users", {
+    fetch("https://vast-plateau-43537.herokuapp.com/users", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -19,7 +19,7 @@ const AllUsers = () => {
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
-  // const {data:users, isLoading} = useQuery('users', ()=> fetch('http://localhost:5000/users').then(res => res.json()));
+  // const {data:users, isLoading} = useQuery('users', ()=> fetch('https://vast-plateau-43537.herokuapp.com/users').then(res => res.json()));
 
   // if(isLoading){
   //   return <CircularProgress></CircularProgress>
