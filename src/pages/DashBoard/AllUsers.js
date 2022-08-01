@@ -33,7 +33,7 @@ const AllUsers = () => {
               <TableRow>
                 <TableCell align="left">Name</TableCell>
                 <TableCell align="left">Time</TableCell>
-                <TableCell align="left">Action</TableCell>
+                <TableCell align="left">Role</TableCell>
                 <TableCell align="left">Action</TableCell>
               </TableRow>
             </TableHead>

@@ -50,7 +50,7 @@ const BookedAppointments = ({ date }) => {
     .then(res => res.json())
     .then(data => {
       if (data.deletedCount === 1) {
-        toast.success('Appointment has been Canceled')
+        toast.info('Appointment has been Canceled')
         const remainingAppointments = bookedAppointments.filter(bp => bp._id !== id);
         setBookedAppointments(remainingAppointments);
 

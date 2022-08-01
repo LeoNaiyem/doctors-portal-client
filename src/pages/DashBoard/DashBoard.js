@@ -1,29 +1,32 @@
-import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import PropTypes from 'prop-types';
-import * as React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import MailIcon from "@mui/icons-material/Mail";
+import MenuIcon from "@mui/icons-material/Menu";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import PropTypes from "prop-types";
+import * as React from "react";
+import { Link, Outlet } from "react-router-dom";
+import useAdmin from "../../hooks/useAdmin";
+import useAuth from "../../hooks/useAuth";
 
 const drawerWidth = 240;
 
 function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const { user } = useAuth();
+  const [isAdmin] = useAdmin(user);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -35,37 +38,69 @@ function Dashboard(props) {
       <List>
         <ListItem>
           <ListItemButton>
-            <Link style = {{color:'#757575', textDecoration:'none'}} to='/home'>Home</Link>
+            <Link
+              style={{ color: "#757575", textDecoration: "none" }}
+              to="/home"
+            >
+              Home
+            </Link>
           </ListItemButton>
         </ListItem>
         <ListItem>
           <ListItemButton>
-            <Link style = {{color:'#757575', textDecoration:'none'}} to='/appointment'>Get Appointment</Link>
+            <Link
+              style={{ color: "#757575", textDecoration: "none" }}
+              to="/appointment"
+            >
+              Get Appointment
+            </Link>
           </ListItemButton>
         </ListItem>
         <ListItem>
           <ListItemButton>
-            <Link style = {{color:'#757575', textDecoration:'none'}} to='/dashboard'>My Appointments</Link>
+            <Link
+              style={{ color: "#757575", textDecoration: "none" }}
+              to="/dashboard"
+            >
+              My Appointments
+            </Link>
           </ListItemButton>
         </ListItem>
         <ListItem>
           <ListItemButton>
-            <Link style = {{color:'#757575', textDecoration:'none'}} to='/dashboard/history'>My History</Link>
+            <Link
+              style={{ color: "#757575", textDecoration: "none" }}
+              to="/dashboard/history"
+            >
+              My History
+            </Link>
           </ListItemButton>
         </ListItem>
         <ListItem>
           <ListItemButton>
-            <Link style = {{color:'#757575', textDecoration:'none'}} to='/dashboard/addDoctor'>Add Doctor</Link>
+            <Link
+              style={{ color: "#757575", textDecoration: "none" }}
+              to="/dashboard/addDoctor"
+            >
+              Add Doctor
+            </Link>
           </ListItemButton>
         </ListItem>
-        <ListItem>
-          <ListItemButton>
-            <Link style = {{color:'#757575', textDecoration:'none'}} to='/dashboard/users'>All Users</Link>
-          </ListItemButton>
-        </ListItem>
+        {isAdmin && (
+          <ListItem>
+            <ListItemButton>
+              <Link
+                style={{ color: "#757575", textDecoration: "none" }}
+                to="/dashboard/users"
+              >
+                All Users
+              </Link>
+            </ListItemButton>
+          </ListItem>
+        )}
       </List>
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -78,7 +113,7 @@ function Dashboard(props) {
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {["All mail", "Trash", "Spam"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -92,10 +127,11 @@ function Dashboard(props) {
     </div>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -110,7 +146,7 @@ function Dashboard(props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { sm: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -133,8 +169,11 @@ function Dashboard(props) {
             keepMounted: true,
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
           }}
         >
           {drawer}
@@ -142,8 +181,11 @@ function Dashboard(props) {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            display: { xs: "none", sm: "block" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
           }}
           open
         >
@@ -152,12 +194,15 @@ function Dashboard(props) {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+        }}
       >
         <Toolbar />
 
-          <Outlet></Outlet>
-
+        <Outlet></Outlet>
       </Box>
     </Box>
   );

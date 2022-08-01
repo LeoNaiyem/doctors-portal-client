@@ -11,6 +11,7 @@ import History from "./pages/DashBoard/History";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import PrivateOutlet from "./pages/Login/PrivateOutlet/PrivateOutlet";
+import RequireAdmin from "./pages/Login/RequireAdmin/RequireAdmin";
 import Register from "./pages/Register/Register";
 
 function App() {
@@ -25,7 +26,9 @@ function App() {
             <Route index element={<DashboardHome />} />
             <Route path="addDoctor" element={<AddDoctor />} />
             <Route path="history" element={<History />} />
-            <Route path="users" element={<AllUsers />} />
+            <Route path="*" element={<RequireAdmin />}>
+              <Route path="users" element={<AllUsers />} />
+            </Route>
           </Route>
         </Route>
         <Route path="/login" element={<Login />} />
