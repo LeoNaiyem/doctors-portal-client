@@ -76,27 +76,29 @@ function Dashboard(props) {
             </Link>
           </ListItemButton>
         </ListItem>
-        <ListItem>
-          <ListItemButton>
-            <Link
-              style={{ color: "#757575", textDecoration: "none" }}
-              to="/dashboard/addDoctor"
-            >
-              Add Doctor
-            </Link>
-          </ListItemButton>
-        </ListItem>
         {isAdmin && (
-          <ListItem>
-            <ListItemButton>
-              <Link
-                style={{ color: "#757575", textDecoration: "none" }}
-                to="/dashboard/users"
-              >
-                All Users
-              </Link>
-            </ListItemButton>
-          </ListItem>
+          <>
+            <ListItem>
+              <ListItemButton>
+                <Link
+                  style={{ color: "#757575", textDecoration: "none" }}
+                  to="/dashboard/addDoctor"
+                >
+                  Add Doctor
+                </Link>
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton>
+                <Link
+                  style={{ color: "#757575", textDecoration: "none" }}
+                  to="/dashboard/users"
+                >
+                  All Users
+                </Link>
+              </ListItemButton>
+            </ListItem>
+          </>
         )}
       </List>
       <List>

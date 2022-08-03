@@ -24,10 +24,10 @@ function App() {
           <Route path="appointment" element={<Appointment />} />
           <Route path="dashboard" element={<DashBoard />}>
             <Route index element={<DashboardHome />} />
-            <Route path="addDoctor" element={<AddDoctor />} />
             <Route path="history" element={<History />} />
             <Route path="*" element={<RequireAdmin />}>
               <Route path="users" element={<AllUsers />} />
+              <Route path="addDoctor" element={<AddDoctor />} />
             </Route>
           </Route>
         </Route>
