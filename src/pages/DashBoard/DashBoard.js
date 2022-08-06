@@ -92,6 +92,16 @@ function Dashboard(props) {
               <ListItemButton>
                 <Link
                   style={{ color: "#757575", textDecoration: "none" }}
+                  to="/dashboard/manageDoctors"
+                >
+                  Manage Doctors
+                </Link>
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton>
+                <Link
+                  style={{ color: "#757575", textDecoration: "none" }}
                   to="/dashboard/users"
                 >
                   All Users

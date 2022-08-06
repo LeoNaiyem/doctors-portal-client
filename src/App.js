@@ -8,6 +8,7 @@ import AllUsers from "./pages/DashBoard/AllUsers";
 import DashBoard from "./pages/DashBoard/DashBoard";
 import DashboardHome from "./pages/DashBoard/DashboardHome";
 import History from "./pages/DashBoard/History";
+import ManageDoctors from "./pages/DashBoard/ManageDoctors";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import PrivateOutlet from "./pages/Login/PrivateOutlet/PrivateOutlet";
@@ -28,6 +29,7 @@ function App() {
             <Route path="*" element={<RequireAdmin />}>
               <Route path="users" element={<AllUsers />} />
               <Route path="addDoctor" element={<AddDoctor />} />
+              <Route path="manageDoctors" element={<ManageDoctors />} />
             </Route>
           </Route>
         </Route>

@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import SingleUser from "./SingleUser";
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     fetch("https://vast-plateau-43537.herokuapp.com/users", {
       method: "GET",
@@ -17,33 +19,36 @@ const AllUsers = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => setUsers(data));
+      .then((data) => {
+        setUsers(data);
+        setIsLoading(false);
+      });
   }, []);
   // const {data:users, isLoading} = useQuery('users', ()=> fetch('https://vast-plateau-43537.herokuapp.com/users').then(res => res.json()));
 
-  // if(isLoading){
-  //   return <CircularProgress></CircularProgress>
-  // }
+  if (isLoading) {
+    return <CircularProgress />;
+  }
   return (
     <div>
-        <h2 style={{ textAlign: "center" }}>Total User: {users.length}</h2>
-        <TableContainer component={Paper}>
-          <Table aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="left">Name</TableCell>
-                <TableCell align="left">Time</TableCell>
-                <TableCell align="left">Role</TableCell>
-                <TableCell align="left">Action</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {users.map((user, index) => (
-                <SingleUser key={index} user={user}></SingleUser>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+      <h2 style={{ textAlign: "center" }}>Total User: {users.length}</h2>
+      <TableContainer component={Paper}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="left">Name</TableCell>
+              <TableCell align="left">Time</TableCell>
+              <TableCell align="left">Role</TableCell>
+              <TableCell align="left">Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {users.map((user, index) => (
+              <SingleUser key={index} user={user}></SingleUser>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };

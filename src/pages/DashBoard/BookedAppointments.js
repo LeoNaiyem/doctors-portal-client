@@ -43,23 +43,28 @@ const BookedAppointments = ({ date }) => {
   }, [user.email, dateString, navigate, handleLogOutUser]);
 
   const handleAppointmentCancel = (id) => {
-    console.log(id)
-    fetch(`https://vast-plateau-43537.herokuapp.com/appointments/${id}`, {
-      method: 'DELETE',
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.deletedCount === 1) {
-        toast.info('Appointment has been Canceled')
-        const remainingAppointments = bookedAppointments.filter(bp => bp._id !== id);
-        setBookedAppointments(remainingAppointments);
-
-      }else{
-        const errorMessage = data.error;
-        toast.error(errorMessage);
-      }
-    })
-  }
+    const confirmed = window.confirm(
+      "Are you sure you want to cancel this appointment?"
+    );
+    if (confirmed) {
+      fetch(`https://vast-plateau-43537.herokuapp.com/appointments/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount === 1) {
+            toast.info("Appointment has been Canceled");
+            const remainingAppointments = bookedAppointments.filter(
+              (bp) => bp._id !== id
+            );
+            setBookedAppointments(remainingAppointments);
+          } else {
+            const errorMessage = data.error;
+            toast.error(errorMessage);
+          }
+        });
+    }
+  };
 
   return (
     <div>
@@ -91,7 +96,14 @@ const BookedAppointments = ({ date }) => {
                   {bookedAppointment.serviceName}
                 </TableCell>
                 <TableCell align="center">
-                  <Button onClick={()=>handleAppointmentCancel(bookedAppointment._id)} variant="contained" size="small" color="error">
+                  <Button
+                    onClick={() =>
+                      handleAppointmentCancel(bookedAppointment._id)
+                    }
+                    variant="contained"
+                    size="small"
+                    color="error"
+                  >
                     cancel
                   </Button>
                 </TableCell>
