@@ -9,6 +9,7 @@ import DashBoard from "./pages/DashBoard/DashBoard";
 import DashboardHome from "./pages/DashBoard/DashboardHome";
 import History from "./pages/DashBoard/History";
 import ManageDoctors from "./pages/DashBoard/ManageDoctors";
+import Payment from "./pages/DashBoard/Payment";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import PrivateOutlet from "./pages/Login/PrivateOutlet/PrivateOutlet";
@@ -26,6 +27,7 @@ function App() {
           <Route path="dashboard" element={<DashBoard />}>
             <Route index element={<DashboardHome />} />
             <Route path="history" element={<History />} />
+            <Route path="payment/:id" element={<Payment />} />
             <Route path="*" element={<RequireAdmin />}>
               <Route path="users" element={<AllUsers />} />
               <Route path="addDoctor" element={<AddDoctor />} />

@@ -23,12 +23,13 @@ const style = {
   };
 
 const AppointmentModal = ({open, handleClose, booking, date, setAppointmentSuccess}) => {
-    const {name, time} = booking;
+    const {name, time, price} = booking;
     const {user} = useAuth();
     const initialData = {
       patientName: user.displayName,
       email: user.email,
-      phone: ''
+      phone: '',
+      price: price,
     }
     const [appointmentData, setAppointmentData] = useState(initialData);
 

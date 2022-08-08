@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,7 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 
@@ -79,6 +79,7 @@ const BookedAppointments = ({ date }) => {
               <TableCell align="center">Name</TableCell>
               <TableCell align="center">Time</TableCell>
               <TableCell align="center">Service</TableCell>
+              <TableCell align="center">Payment</TableCell>
               <TableCell align="center">Action</TableCell>
             </TableRow>
           </TableHead>
@@ -94,6 +95,22 @@ const BookedAppointments = ({ date }) => {
                 <TableCell align="center">{bookedAppointment.time}</TableCell>
                 <TableCell align="center">
                   {bookedAppointment.serviceName}
+                </TableCell>
+                <TableCell align="center">
+                  { (bookedAppointment?.price && !bookedAppointment?.paid) &&
+                    <Button variant="contained" size="small" color="success">
+                      <Link
+                        style={{ color: "inherit", textDecoration: "none" }}
+                        to={`/dashboard/payment/${bookedAppointment._id}`}
+                      >
+                        Pay
+                      </Link>
+                    </Button>
+                  }
+                  {
+                    (bookedAppointment?.price && bookedAppointment?.paid) &&
+                    <Typography sx={{ fontWeight: 700 }} variant="caption" color="success.main">Paid</Typography>
+                   }
                 </TableCell>
                 <TableCell align="center">
                   <Button

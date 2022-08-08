@@ -5,7 +5,7 @@ import AppointmentModal from './AppointmentModal';
 
 
 const Booking = ({booking, date, setAppointmentSuccess}) => {
-    const {name, time, space} = booking;
+    const {name, time, space, price} = booking;
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -19,8 +19,11 @@ const Booking = ({booking, date, setAppointmentSuccess}) => {
                     <Typography sx={{fontWeight:500, fontSize:'18px'}} variant="h5">
                         {time}
                     </Typography>
-                    <Typography sx={{my:1, color: 'gray'}} variant="caption" display="block" >
+                    <Typography sx={{mt:1, color: 'gray'}} variant="caption" display="block" >
                         AVAILABLE SPACE {space}
+                    </Typography>
+                    <Typography sx={{mb:1, color: 'gray'}} variant="secondary" display="block" >
+                        Price: ${price}
                     </Typography>
                     <Button onClick={handleOpen} variant='contained' sx={{ backgroundColor:'#11d1c8'}}>Book Appointment</Button>
                 </Paper>
