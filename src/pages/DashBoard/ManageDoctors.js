@@ -18,7 +18,7 @@ const ManageDoctors = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/doctors", {
+    fetch("https://doctros-protal-server.onrender.com/doctors", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -36,7 +36,7 @@ const ManageDoctors = () => {
       "Are you sure you want to remove this Doctor?"
     );
     if (confirmed) {
-      fetch(`http://localhost:5000/doctors/${id}`, {
+      fetch(`https://doctros-protal-server.onrender.com/doctors/${id}`, {
         method: "DELETE",
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

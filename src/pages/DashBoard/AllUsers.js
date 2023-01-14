@@ -12,7 +12,7 @@ const AllUsers = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    fetch("https://vast-plateau-43537.herokuapp.com/users", {
+    fetch("https://doctros-protal-server.onrender.com/users", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -24,7 +24,7 @@ const AllUsers = () => {
         setIsLoading(false);
       });
   }, []);
-  // const {data:users, isLoading} = useQuery('users', ()=> fetch('https://vast-plateau-43537.herokuapp.com/users').then(res => res.json()));
+  // const {data:users, isLoading} = useQuery('users', ()=> fetch('https://doctros-protal-server.onrender.com/users').then(res => res.json()));
 
   if (isLoading) {
     return <CircularProgress />;

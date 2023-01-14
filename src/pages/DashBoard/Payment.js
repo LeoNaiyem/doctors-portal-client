@@ -14,7 +14,7 @@ const Payment = () => {
   const [appointment, setAppointment] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    fetch(`http://localhost:5000/appointments/${id}`)
+    fetch(`https://doctros-protal-server.onrender.com/appointments/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setAppointment(data);

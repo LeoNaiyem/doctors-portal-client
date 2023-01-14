@@ -1,10 +1,10 @@
 import {
-  Autocomplete,
-  Box,
-  Button,
-  CircularProgress,
-  TextField,
-  Typography
+    Autocomplete,
+    Box,
+    Button,
+    CircularProgress,
+    TextField,
+    Typography
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -20,7 +20,7 @@ const AddDoctor = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/services/name")
+    fetch("https://doctros-protal-server.onrender.com/services/name")
       .then((res) => res.json())
       .then((data) => {
         setServicesName(data);
@@ -51,7 +51,7 @@ const AddDoctor = () => {
             img: img,
           };
           //send doctor's details to the database
-          fetch("http://localhost:5000/doctors", {
+          fetch("https://doctros-protal-server.onrender.com/doctors", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

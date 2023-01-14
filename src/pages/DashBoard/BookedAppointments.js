@@ -19,7 +19,7 @@ const BookedAppointments = ({ date }) => {
 
   useEffect(() => {
     fetch(
-      `https://vast-plateau-43537.herokuapp.com/appointments?email=${user.email}&date=${dateString}`,
+      `https://doctros-protal-server.onrender.com/appointments?email=${user.email}&date=${dateString}`,
       {
         method: "GET",
         headers: {
@@ -47,7 +47,7 @@ const BookedAppointments = ({ date }) => {
       "Are you sure you want to cancel this appointment?"
     );
     if (confirmed) {
-      fetch(`https://vast-plateau-43537.herokuapp.com/appointments/${id}`, {
+      fetch(`https://doctros-protal-server.onrender.com/appointments/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

@@ -6,7 +6,7 @@ const SingleUser = ({ user }) => {
   const { email, role } = user;
 
   const makeAdmin = () => {
-    fetch(`https://vast-plateau-43537.herokuapp.com/users/admin/${email}`,{
+    fetch(`https://doctros-protal-server.onrender.com/users/admin/${email}`,{
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

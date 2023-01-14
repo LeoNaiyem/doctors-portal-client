@@ -12,7 +12,7 @@ const CheckoutForm = ({ appointment }) => {
   const [clientSecret, setClientSecret] = useState("");
   const { price, patientName, email, _id } = appointment;
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://doctros-protal-server.onrender.com/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ const CheckoutForm = ({ appointment }) => {
         appointment: _id,
         transactionId: paymentIntent.id,
       };
-      fetch(`http://localhost:5000/appointments/${_id}`, {
+      fetch(`https://doctros-protal-server.onrender.com/appointments/${_id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
